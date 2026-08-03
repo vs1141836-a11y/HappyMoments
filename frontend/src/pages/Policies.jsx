@@ -109,7 +109,7 @@ const Policies = () => {
                   <strong className="text-white">Collection of Information:</strong> We store login name, email, contact telephone, and booking address history. Password strings are encrypted instantly using bcrypt hashing in our database.
                 </li>
                 <li>
-                  <strong className="text-white">Transaction Logs:</strong> Online payments are routed directly to Razorpay's secure SDK. We never parse, view, or record credit card credentials or bank passwords in our database. Only Razorpay transaction IDs, status logs, and signatures are recorded.
+                  <strong className="text-white">Transaction Logs:</strong> All checkouts generate a secure booking order that redirects to WhatsApp Click-to-Chat. We never ask for, view, or record credit card credentials, bank passwords, or digital signatures in our database.
                 </li>
                 <li>
                   <strong className="text-white">Third-Party Shares:</strong> We never sell, exchange, or share customer emails or event locations with third-party advertisers.
@@ -125,7 +125,7 @@ const Policies = () => {
               
               <div className="space-y-2">
                 <h4 className="font-outfit text-white font-bold text-sm">Q1. Can I book decoration packages and rent props in a single cart?</h4>
-                <p className="text-xs">Yes! Our platform supports a unified cart. You can add one wedding stage service package and rent additional LED marquee numbers and plinths together, checking out with a single combined Razorpay payment.</p>
+                <p className="text-xs">Yes! Our platform supports a unified cart. You can add one wedding stage service package and rent additional LED marquee numbers and plinths together, checking out directly with our integrated WhatsApp booking flow.</p>
               </div>
 
               <div className="space-y-2">

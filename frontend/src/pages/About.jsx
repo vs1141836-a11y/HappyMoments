@@ -41,7 +41,7 @@ const About = () => {
             { icon: Sparkles, val: '500+', title: 'Events Curated', desc: 'From royal weddings to intimate garden anniversaries.' },
             { icon: Trophy, val: 'Premium', title: 'Top-tier Materials', desc: 'Imported silks, fresh cut roses & high-gloss acrylic plinths.' },
             { icon: CalendarClock, val: '24h', title: 'Setup Schedules', desc: 'Timely on-site assembly, adjustments & teardown services.' },
-            { icon: ShieldCheck, val: 'Verified', title: 'Razorpay Secure', desc: 'Convenient 100% online deposit checking & confirmation.' },
+            { icon: ShieldCheck, val: 'Verified', title: '100% Reliable', desc: 'Secure booking registration with direct WhatsApp communication.' },
           ].map((usp, idx) => {
             const Icon = usp.icon;
             return (

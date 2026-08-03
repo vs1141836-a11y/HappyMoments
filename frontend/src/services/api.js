@@ -46,7 +46,6 @@ export const clearUserCart = () => API.post('/cart/clear');
 // Bookings & Payments
 export const checkAvailability = (items, eventDate) => API.post('/bookings/check-availability', { items, eventDate });
 export const createBookingOrder = (bookingData) => API.post('/bookings', bookingData);
-export const verifyRazorpayPayment = (paymentData) => API.post('/bookings/verify', paymentData);
 export const getBookingHistory = () => API.get('/bookings/history');
 export const getBookingDetails = (id) => API.get(`/bookings/${id}`);
 export const downloadInvoiceUrl = (id) => `${API.defaults.baseURL}/bookings/${id}/invoice`;

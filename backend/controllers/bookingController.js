@@ -1,4 +1,3 @@
-import Razorpay from 'razorpay';
 import crypto from 'crypto';
 import mongoose from 'mongoose';
 import Booking from '../models/Booking.js';
@@ -9,21 +8,6 @@ import Cart from '../models/Cart.js';
 import User from '../models/User.js';
 import { sendBookingConfirmationEmail, sendAdminNotificationEmail } from '../services/emailService.js';
 import { generateInvoicePDF } from '../services/invoiceService.js';
-
-// Initialize Razorpay
-const getRazorpayInstance = () => {
-  const keyId = process.env.RAZORPAY_KEY_ID;
-  const keySecret = process.env.RAZORPAY_KEY_SECRET;
-  
-  if (!keyId || keyId.includes('dummy') || !keySecret || keySecret.includes('dummy')) {
-    return null;
-  }
-  
-  return new Razorpay({
-    key_id: keyId,
-    key_secret: keySecret
-  });
-};
 
 // @desc    Check item availability for a specific date
 // @route   POST /api/bookings/check-availability
@@ -362,23 +346,6 @@ export const createBooking = async (req, res, next) => {
     const randomDigits = Math.floor(1000 + Math.random() * 9000);
     const bookingId = `HM-${dateStr}-${randomDigits}`;
 
-    const rzp = getRazorpayInstance();
-    let rzpOrder = null;
-
-    if (rzp) {
-      try {
-        const options = {
-          amount: totalAmount * 100,
-          currency: 'INR',
-          receipt: `receipt_${bookingId}`,
-        };
-        rzpOrder = await rzp.orders.create(options);
-      } catch (err) {
-        console.error('Razorpay order creation failed:', err);
-        return res.status(500).json({ success: false, message: 'Payment gateway initialization failed' });
-      }
-    }
-
     const booking = await Booking.create({
       bookingId,
       user: req.user._id,
@@ -391,14 +358,12 @@ export const createBooking = async (req, res, next) => {
       totalAmount,
       paymentStatus: 'unpaid',
       bookingStatus: 'pending',
-      razorpayOrderId: rzpOrder ? rzpOrder.id : `mock_order_${bookingId}`,
+      razorpayOrderId: `mock_order_${bookingId}`,
     });
 
     res.status(201).json({
       success: true,
       booking,
-      isSimulated: !rzp,
-      razorpayKeyId: process.env.RAZORPAY_KEY_ID || 'rzp_test_dummykeyid123',
     });
   } catch (error) {
     next(error);
@@ -469,26 +434,7 @@ export const verifyPayment = async (req, res, next) => {
       return res.status(404).json({ success: false, message: 'Booking not found' });
     }
 
-    const rzp = getRazorpayInstance();
-    let isSignatureValid = false;
-
-    if (rzp) {
-      const text = razorpay_order_id + '|' + razorpay_payment_id;
-      const generated_signature = crypto
-        .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
-        .update(text)
-        .digest('hex');
-
-      isSignatureValid = generated_signature === razorpay_signature;
-    } else {
-      isSignatureValid = true;
-    }
-
-    if (!isSignatureValid) {
-      booking.paymentStatus = 'failed';
-      await booking.save();
-      return res.status(400).json({ success: false, message: 'Payment verification failed' });
-    }
+    const isSignatureValid = true;
 
     booking.paymentStatus = 'paid';
     booking.bookingStatus = 'confirmed';
