@@ -54,14 +54,14 @@ const seedData = async () => {
 
     // 2. Seed Categories
     const categoriesData = [
-      { name: 'Birthday Decorations', type: 'decor', description: 'Colorful, themed balloon designs and custom backdrop setups.' },
-      { name: 'Baby Shower Decorations', type: 'decor', description: 'Cute baby themes, pastels, teddy bear props, and balloon arches.' },
-      { name: 'Anniversary Decorations', type: 'decor', description: 'Elegant romantic floral setups, rose gold themes, and fairy lights.' },
-      { name: 'Naming Ceremony Decorations', type: 'decor', description: 'Floral cradles, hanging wreaths, elegant drapes and name reveal stages.' },
-      { name: 'LED & Neon Lights', type: 'rental', description: 'Alphabet marquee letters, neon signboards, and ambient event lighting.' },
-      { name: 'Backdrops & Walls', type: 'rental', description: 'Shimmer walls, round ring backdrops, and artificial flower walls.' },
-      { name: 'Tables & Stands', type: 'rental', description: 'Acrylic plinths, cylindrical pedestals, and decorative dessert tables.' },
-      { name: 'Themed Props', type: 'rental', description: 'Life-sized teddy bears, photo booths, and cartoon props.' },
+      { name: 'Birthday Decorations', slug: 'birthday-decorations', type: 'decor', description: 'Colorful, themed balloon designs and custom backdrop setups.' },
+      { name: 'Baby Shower Decorations', slug: 'baby-shower-decorations', type: 'decor', description: 'Cute baby themes, pastels, teddy bear props, and balloon arches.' },
+      { name: 'Anniversary Decorations', slug: 'anniversary-decorations', type: 'decor', description: 'Elegant romantic floral setups, rose gold themes, and fairy lights.' },
+      { name: 'Naming Ceremony Decorations', slug: 'naming-ceremony-decorations', type: 'decor', description: 'Floral cradles, hanging wreaths, elegant drapes and name reveal stages.' },
+      { name: 'LED & Neon Lights', slug: 'led-neon-lights', type: 'rental', description: 'Alphabet marquee letters, neon signboards, and ambient event lighting.' },
+      { name: 'Backdrops & Walls', slug: 'backdrops-walls', type: 'rental', description: 'Shimmer walls, round ring backdrops, and artificial flower walls.' },
+      { name: 'Tables & Stands', slug: 'tables-stands', type: 'rental', description: 'Acrylic plinths, cylindrical pedestals, and decorative dessert tables.' },
+      { name: 'Themed Props', slug: 'themed-props', type: 'rental', description: 'Life-sized teddy bears, photo booths, and cartoon props.' },
     ];
 
     const categories = await Category.insertMany(categoriesData);
