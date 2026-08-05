@@ -4,6 +4,7 @@ import { CartContext } from '../context/CartContext.jsx';
 import { AuthContext } from '../context/AuthContext.jsx';
 import { Trash2, Calendar, MapPin, Clock, ArrowRight, ShieldCheck, HelpCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { getImageUrl } from '../services/api.js';
 
 const Cart = () => {
   const { user } = useContext(AuthContext);
@@ -106,7 +107,7 @@ const Cart = () => {
                     
                     {/* Item Image */}
                     <div className="w-full md:w-32 aspect-[4/3] rounded overflow-hidden bg-slate-900 shrink-0 border border-gold-400/10">
-                      <img src={detail.images[0]} alt="" className="w-full h-full object-cover" />
+                      <img src={getImageUrl(detail.images[0])} alt="" className="w-full h-full object-cover" />
                     </div>
 
                     {/* Item Details */}

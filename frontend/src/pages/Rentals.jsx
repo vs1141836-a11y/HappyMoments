@@ -259,7 +259,7 @@ const Rentals = () => {
                     {/* Image */}
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <img
-                        src={rental.images[0]}
+                        src={api.getImageUrl(rental.images[0])}
                         alt={rental.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />

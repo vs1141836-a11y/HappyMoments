@@ -119,7 +119,7 @@ const Home = () => {
               transition={{ duration: 0.5, delay: i * 0.15 }}
               className="relative rounded-lg overflow-hidden group border border-gold-400/10 bg-slate-950 aspect-[4/5] shadow-luxury"
             >
-              <div className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700" style={{ backgroundImage: `url('${cat.img}')` }}></div>
+              <div className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700" style={{ backgroundImage: `url('${api.getImageUrl(cat.img)}')` }}></div>
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
               
               <div className="absolute bottom-0 left-0 w-full p-6 text-center space-y-2 z-10">
@@ -175,7 +175,7 @@ const Home = () => {
                   {/* Package Image */}
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <img
-                      src={decor.images[0]}
+                      src={api.getImageUrl(decor.images[0])}
                       alt={decor.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />

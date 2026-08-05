@@ -369,7 +369,7 @@ const Dashboard = () => {
                       {wishlistDecor.map((item) => (
                         <div key={item._id} className="rounded-lg overflow-hidden border border-gold-400/10 bg-slate-950 flex flex-col justify-between group">
                           <div className="aspect-[4/3] overflow-hidden relative">
-                            <img src={item.images[0]} alt="" className="w-full h-full object-cover" />
+                            <img src={api.getImageUrl(item.images[0])} alt="" className="w-full h-full object-cover" />
                             <button
                               onClick={() => toggleWishlist('Decoration', item._id)}
                               className="absolute top-2 right-2 p-2 bg-black/60 rounded-full text-rose-500 border border-rose-500/20"
@@ -402,7 +402,7 @@ const Dashboard = () => {
                       {wishlistRent.map((item) => (
                         <div key={item._id} className="rounded-lg overflow-hidden border border-gold-400/10 bg-slate-950 flex flex-col justify-between group">
                           <div className="aspect-[4/3] overflow-hidden relative">
-                            <img src={item.images[0]} alt="" className="w-full h-full object-cover" />
+                            <img src={api.getImageUrl(item.images[0])} alt="" className="w-full h-full object-cover" />
                             <button
                               onClick={() => toggleWishlist('DecorationRental', item._id)}
                               className="absolute top-2 right-2 p-2 bg-black/60 rounded-full text-rose-500 border border-rose-500/20"

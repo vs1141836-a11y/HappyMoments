@@ -239,7 +239,7 @@ const Packages = () => {
                     {/* Image */}
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <img
-                        src={decor.images[0]}
+                        src={api.getImageUrl(decor.images[0])}
                         alt={decor.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />

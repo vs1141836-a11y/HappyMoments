@@ -1,8 +1,22 @@
 import axios from 'axios';
 
+let apiURL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+if (apiURL && !apiURL.endsWith('/api')) {
+  apiURL = apiURL.endsWith('/') ? `${apiURL}api` : `${apiURL}/api`;
+}
+
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  baseURL: apiURL,
 });
+
+export const getImageUrl = (url) => {
+  if (!url) return '';
+  if (typeof url === 'string' && url.startsWith('http://localhost:5000')) {
+    const activeBase = apiURL.replace('/api', '');
+    return url.replace('http://localhost:5000', activeBase);
+  }
+  return url;
+};
 
 // Request interceptor to add JWT token to requests
 API.interceptors.request.use(

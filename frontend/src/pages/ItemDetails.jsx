@@ -215,7 +215,7 @@ const ItemDetails = () => {
           <div className="space-y-4">
             <div className="relative aspect-[4/3] rounded-lg overflow-hidden border border-gold-400/20 bg-slate-950">
               <img
-                src={item.images[activeImage]}
+                src={api.getImageUrl(item.images[activeImage])}
                 alt={item.title}
                 className="w-full h-full object-cover"
               />
@@ -239,7 +239,7 @@ const ItemDetails = () => {
                     activeImage === i ? 'border-gold-400 scale-95' : 'border-gold-400/10 hover:border-gold-400/40'
                   }`}
                 >
-                  <img src={img} alt="" className="w-full h-full object-cover" />
+                  <img src={api.getImageUrl(img)} alt="" className="w-full h-full object-cover" />
                 </button>
               ))}
             </div>
@@ -491,7 +491,7 @@ const ItemDetails = () => {
               {similarItems.map((item) => (
                 <div key={item._id} className="rounded-lg overflow-hidden border border-gold-400/10 bg-slate-950 hover:border-gold-400/30 transition-all flex flex-col justify-between">
                   <div className="aspect-[4/3] overflow-hidden">
-                    <img src={item.images[0]} alt="" className="w-full h-full object-cover" />
+                    <img src={api.getImageUrl(item.images[0])} alt="" className="w-full h-full object-cover" />
                   </div>
                   <div className="p-4 space-y-2">
                     <h3 className="font-outfit text-sm text-white font-bold truncate">{item.title}</h3>
