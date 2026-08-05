@@ -22,7 +22,22 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 dotenv.config();
 
 // Connect to Database
-connectDB();
+connectDB().then(async () => {
+  if (global.isMockDB) return;
+  try {
+    const Category = (await import('./models/Category.js')).default;
+    const count = await Category.countDocuments();
+    if (count === 0) {
+      console.log('Database connected but empty. Automatically seeding live database...');
+      const { seedData } = await import('./seeder.js');
+      await seedData();
+    } else {
+      console.log(`Database connected and healthy. Found ${count} categories.`);
+    }
+  } catch (err) {
+    console.error('Database auto-seeding check failed:', err);
+  }
+});
 
 const app = express();
 

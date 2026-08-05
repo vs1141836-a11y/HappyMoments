@@ -742,11 +742,19 @@ const seedData = async () => {
     console.log('Decoration rentals seeded...');
 
     console.log('All MERN stack database tables seeded successfully!');
-    process.exit();
+    if (process.argv[1] && process.argv[1].endsWith('seeder.js')) {
+      process.exit(0);
+    }
   } catch (error) {
     console.error(`Seeding Failed Error: ${error.message}`);
-    process.exit(1);
+    if (process.argv[1] && process.argv[1].endsWith('seeder.js')) {
+      process.exit(1);
+    }
   }
 };
 
-seedData();
+if (process.argv[1] && process.argv[1].endsWith('seeder.js')) {
+  seedData();
+}
+
+export { seedData };
