@@ -16,6 +16,11 @@ const seedData = async () => {
   try {
     await connectDB();
 
+    if (global.isMockDB) {
+      console.error('Database connection failed. Seeding aborted to prevent timeout hang.');
+      process.exit(1);
+    }
+
     // Clear existing data
     await User.deleteMany();
     await Category.deleteMany();
