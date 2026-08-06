@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import DecorationRental from '../models/DecorationRental.js';
 import Category from '../models/Category.js';
 

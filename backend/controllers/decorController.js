@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import Decoration from '../models/Decoration.js';
 import Category from '../models/Category.js';
 
