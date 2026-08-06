@@ -60,6 +60,20 @@ app.get('/', (req, res) => {
   res.json({ message: 'Welcome to HappyMoments Event Booking Platform API' });
 });
 
+// Manual Database Seed Endpoint (standalone - avoids /:id route conflicts)
+app.get('/api/seed', async (req, res) => {
+  if (req.query.secret !== 'vijayhappymoments2026') {
+    return res.status(401).json({ success: false, message: 'Unauthorized' });
+  }
+  try {
+    const { seedData } = await import('./seeder.js');
+    await seedData();
+    res.json({ success: true, message: 'Database seeded successfully!' });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 // Register API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/categories', categoryRoutes);
