@@ -14,11 +14,17 @@ dotenv.config();
 
 const seedData = async () => {
   try {
-    await connectDB();
+    // Only connect if not already connected (when run standalone via CLI)
+    if (mongoose.connection.readyState !== 1) {
+      await connectDB();
 
-    if (global.isMockDB) {
-      console.error('Database connection failed. Seeding aborted to prevent timeout hang.');
-      process.exit(1);
+      if (global.isMockDB) {
+        console.error('Database connection failed. Seeding aborted.');
+        if (process.argv[1] && process.argv[1].endsWith('seeder.js')) {
+          process.exit(1);
+        }
+        return;
+      }
     }
 
     // Clear existing data
@@ -30,6 +36,11 @@ const seedData = async () => {
     await Booking.deleteMany();
     await Payment.deleteMany();
     await Cart.deleteMany();
+
+    // Drop stale unique indexes to prevent E11000 on re-seed
+    try {
+      await mongoose.connection.db.collection('categories').dropIndex('slug_1');
+    } catch (e) { /* Index may not exist, safe to ignore */ }
 
     console.log('Database cleared...');
 
@@ -91,7 +102,9 @@ const seedData = async () => {
           'Complete On-site Assembly & Teardown'
         ],
         images: [
-          'http://localhost:5000/uploads/fairy_birthday_decor.jpg'
+          'http://localhost:5000/uploads/fairy_birthday_decor.jpg',
+          'http://localhost:5000/uploads/fairy_first_birthday.jpg',
+          'http://localhost:5000/uploads/baby_junia_fairy.jpg'
         ],
         averageRating: 4.8,
         numReviews: 14
@@ -112,7 +125,8 @@ const seedData = async () => {
           'Full Setup, Assembly & On-site Teardown'
         ],
         images: [
-          'http://localhost:5000/uploads/pink_castle_decor.jpg'
+          'http://localhost:5000/uploads/pink_castle_decor.jpg',
+          'http://localhost:5000/uploads/castle_rainbow_birthday.jpg'
         ],
         averageRating: 4.9,
         numReviews: 18
@@ -133,7 +147,8 @@ const seedData = async () => {
           'Teardown & Cleanup Services'
         ],
         images: [
-          'http://localhost:5000/uploads/princess_butterfly_decor.jpg'
+          'http://localhost:5000/uploads/princess_butterfly_decor.jpg',
+          'http://localhost:5000/uploads/princess_green_balloon.jpg'
         ],
         averageRating: 4.7,
         numReviews: 9
@@ -154,7 +169,8 @@ const seedData = async () => {
           'Styling, On-site Delivery & Assembly'
         ],
         images: [
-          'http://localhost:5000/uploads/purple_50th_decor.jpg'
+          'http://localhost:5000/uploads/purple_50th_decor.jpg',
+          'http://localhost:5000/uploads/purple_chrome_kiyara.jpg'
         ],
         averageRating: 4.9,
         numReviews: 15

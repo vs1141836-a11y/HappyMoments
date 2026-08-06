@@ -25,14 +25,14 @@ dotenv.config();
 connectDB().then(async () => {
   if (global.isMockDB) return;
   try {
-    const Category = (await import('./models/Category.js')).default;
-    const count = await Category.countDocuments();
-    if (count === 0) {
-      console.log('Database connected but empty. Automatically seeding live database...');
+    const Decoration = (await import('./models/Decoration.js')).default;
+    const decorCount = await Decoration.countDocuments();
+    if (decorCount === 0) {
+      console.log('Database connected but no decorations found. Automatically seeding...');
       const { seedData } = await import('./seeder.js');
       await seedData();
     } else {
-      console.log(`Database connected and healthy. Found ${count} categories.`);
+      console.log(`Database connected and healthy. Found ${decorCount} decoration packages.`);
     }
   } catch (err) {
     console.error('Database auto-seeding check failed:', err);
