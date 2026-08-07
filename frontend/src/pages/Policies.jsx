@@ -130,7 +130,7 @@ const Policies = () => {
 
               <div className="space-y-2">
                 <h4 className="font-outfit text-white font-bold text-sm">Q2. What geographical areas do you service?</h4>
-                <p className="text-xs">We currently operate and deliver setups across Hyderabad and surrounding function halls. Additional transportation surcharges may apply for setups outside the city limits.</p>
+                <p className="text-xs">We currently operate and deliver setups across Bangalore and surrounding function halls. Additional transportation surcharges may apply for setups outside the city limits.</p>
               </div>
 
               <div className="space-y-2">

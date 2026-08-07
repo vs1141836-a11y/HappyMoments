@@ -61,7 +61,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-outfit text-white text-sm font-bold tracking-wider">OFFICE VENUE</h4>
-                  <p className="text-zinc-500 text-xs mt-1">102, Gold Palace Mansion, Jubilee Hills, Hyderabad, India</p>
+                  <p className="text-zinc-500 text-xs mt-1">Gottigere, Bangalore, Karnataka, India</p>
                 </div>
               </div>
 
@@ -71,7 +71,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-outfit text-white text-sm font-bold tracking-wider">PHONE DETAILS</h4>
-                  <p className="text-zinc-500 text-xs mt-1">+91 98765 43210 (Hours: 9 AM - 6 PM)</p>
+                  <p className="text-zinc-500 text-xs mt-1">+91 90356 28787 (Hours: 9 AM - 6 PM)</p>
                 </div>
               </div>
 
