@@ -79,7 +79,10 @@ export const getDecorations = async (req, res, next) => {
 
     // Category filter
     if (category) {
-      const cat = await Category.findOne({ $or: [{ slug: category }, { _id: mongoose.isValidObjectId(category) ? category : null }] });
+      let cat = await Category.findOne({ slug: category });
+      if (!cat && mongoose.isValidObjectId(category)) {
+        cat = await Category.findById(category);
+      }
       if (cat) {
         query.category = cat._id;
       }
